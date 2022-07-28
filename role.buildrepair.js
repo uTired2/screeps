@@ -69,12 +69,17 @@ var roleBuildRepair = {
             }
         }
         else {
-            var source = thisCreep.pos.findClosestByPath(FIND_SOURCES);
-            thisCreep.say('⛏️');
-            if(thisCreep.harvest(source) == ERR_NOT_IN_RANGE) {
+            let sourceContainer = thisCreep.pos.findClosestByPath(FIND_STRUCTURES, {
+                filter: (s) => s.structureType === STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] >= thisCreep.store.getCapacity()});
+
+
+            //var source = thisCreep.pos.findClosestByPath(FIND_SOURCES);
+            thisCreep.say('⚡');
+
+            if(thisCreep.withdraw(sourceContainer, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 // Move to our harvesting spot.
-                thisCreep.moveTo(source);
-                thisCreep.say('🚓');                
+                thisCreep.moveTo(sourceContainer);
+                //thisCreep.say('🚓');                
             }
 		}    
     },

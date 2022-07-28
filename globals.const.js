@@ -39,7 +39,7 @@ const globals = {
 
         while(creepCost + BODYPART_COST[extraParts[creepCurrentExtraPart]] <= energyAvailable) {
                 
-            console.log('Adding extra body part: ' + extraParts[creepCurrentExtraPart] + ', onto: ' + creepBody);
+            //console.log('Adding extra body part: ' + extraParts[creepCurrentExtraPart] + ', onto: ' + creepBody);
 
             // Add the part to our build
             creepBody.push(extraParts[creepCurrentExtraPart]);
@@ -47,8 +47,7 @@ const globals = {
             creepCost += BODYPART_COST[extraParts[creepCurrentExtraPart]];            
 
             // Loop back to the start of extra body parts once we reach the end
-            creepCurrentExtraPart++;
-            console.log('ExtraParts Len: ' + extraParts.length);
+            creepCurrentExtraPart++;            
             if(creepCurrentExtraPart >= extraParts.length) {
                 creepCurrentExtraPart = 0;
             }
@@ -81,9 +80,9 @@ const globals = {
 
     // Maximum number of creeps to spawn of each type
     CREEP_HARVESTER_MAX: 3,
-    CREEP_BUILDER_MAX: 2,
+    CREEP_BUILDER_MAX: 3,
     CREEP_UPGRADER_MAX: 4,
-    CREEP_HAULER_MAX: 4,
+    CREEP_HAULER_MAX: 5,
     CREEP_DEFENDER_MAX: 1,
 
 
@@ -102,17 +101,18 @@ const globals = {
     CREEP_DEFENDER_ROLE: 'defender',
 
     // Default starting body parts for each creep type, will be expanded based on available spawn energy
-    CREEP_HARVESTER_BODY: [WORK, CARRY, CARRY, MOVE, MOVE],
+    //CREEP_HARVESTER_BODY: [WORK, CARRY, CARRY, MOVE, MOVE],
+    CREEP_HARVESTER_BODY: [WORK, WORK, MOVE, MOVE],
     CREEP_BUILDER_BODY: [WORK, CARRY, CARRY, MOVE, MOVE],
     CREEP_UPGRADER_BODY: [WORK, CARRY, MOVE, MOVE],
-    CREEP_HAULER_BODY: [CARRY,CARRY, CARRY, MOVE, MOVE,MOVE],
+    CREEP_HAULER_BODY: [WORK, CARRY, CARRY, MOVE, MOVE],
     CREEP_DEFENDER_BODY: [TOUGH, TOUGH, TOUGH, TOUGH, ATTACK, ATTACK, MOVE, MOVE],
     
     // Additional part to add to each creep
-    CREEP_HARVESTER_BODY_EXTRA: [MOVE, CARRY],
+    CREEP_HARVESTER_BODY_EXTRA: [WORK, WORK, MOVE],
     CREEP_BUILDER_BODY_EXTRA: [MOVE, MOVE, WORK, MOVE, CARRY],
     CREEP_UPGRADER_BODY_EXTRA: [MOVE, CARRY, MOVE, MOVE, MOVE, WORK],
-    CREEP_HAULER_BODY_EXTRA: [CARRY,MOVE],   
+    CREEP_HAULER_BODY_EXTRA: [CARRY,MOVE,WORK,MOVE],   
     CREEP_DEFENDER_BODY_EXTRA: [MOVE, ATTACK, TOUGH]
 
 };
