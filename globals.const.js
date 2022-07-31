@@ -78,11 +78,27 @@ const globals = {
         return creepName;
     },
 
+    sendNotifyMsg: function(sendText) {
+        let  lastNotifyTick = Memory.lastNotifyTick;            
+        
+        if (typeof lastNotifyTick === 'undefined') {
+            lastNotifyTick = 0;
+        }
+
+        if (Game.time - lastNotifyTick > NOTIFY_TIMEOUT) 
+        {
+            Game.notify(sendText);
+            console.log(sendText);
+
+            Memory.lastNotifyTick = Game.time;
+        }
+    },
+
     // Maximum number of creeps to spawn of each type
     CREEP_HARVESTER_MAX: 3,
     CREEP_BUILDER_MAX: 3,
     CREEP_UPGRADER_MAX: 4,
-    CREEP_HAULER_MAX: 5,
+    CREEP_HAULER_MAX: 4,
     CREEP_DEFENDER_MAX: 1,
 
 
@@ -113,7 +129,13 @@ const globals = {
     CREEP_BUILDER_BODY_EXTRA: [MOVE, MOVE, WORK, MOVE, CARRY],
     CREEP_UPGRADER_BODY_EXTRA: [MOVE, CARRY, MOVE, MOVE, MOVE, WORK],
     CREEP_HAULER_BODY_EXTRA: [CARRY,MOVE,WORK,MOVE],   
-    CREEP_DEFENDER_BODY_EXTRA: [MOVE, ATTACK, TOUGH]
+    CREEP_DEFENDER_BODY_EXTRA: [MOVE, ATTACK, TOUGH],
+
+    // Number of ticks before sending a Game.Notify message to try and avoid flooding my inbox
+    NOTIFY_TIMEOUT : 100,
+
+    // Only repair ramparts up to this value
+    RAMPART_MIN_HEALTH : 50000
 
 };
 
